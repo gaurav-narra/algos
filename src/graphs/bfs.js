@@ -42,3 +42,5 @@ const traverse = (arr, index) => {
 module.exports = {
   traverse
 }
+
+// TODO BFS without using nodes array.
