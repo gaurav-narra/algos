@@ -1,7 +1,7 @@
 let nodes;
 let time;
 
-const traverse = (arr, index) => {
+const traverse = (arr) => {
   nodes = []
   time = 0
 
