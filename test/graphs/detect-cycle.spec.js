@@ -1,7 +1,7 @@
 const detectCycle = require('../../src/graphs/detect-cycle');
 
 describe('detect cycle', () => {
-  it.only('should detect cycle in undirected graph', () => {
+  it('should detect cycle in undirected graph', () => {
     const resp = detectCycle.traverse([[1,4], [0,4,2,3], [1,3], [1,4,2], [3,0,1]], 0)
     resp.should.eql({
       nodes: [{
@@ -34,7 +34,7 @@ describe('detect cycle', () => {
     })
   })
 
-  it.only('should detect cycle in directed graph', () => {
+  it('should detect cycle in directed graph', () => {
     const resp = detectCycle.traverse([[1,3], [4], [5,4], [1], [3], [5]], 0)
     resp.should.eql({
       nodes: [{
