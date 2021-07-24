@@ -11,5 +11,8 @@ describe('min window substring', () => {
 
     resp = minWindowSubstring.minWindow('AaBbCc', 'AbC')
     resp.should.eql('AaBbC')
+
+    resp = minWindowSubstring.minWindow('abdbbadcefacdedfabccd', 'abc')
+    resp.should.eql('abc')
   })
 })

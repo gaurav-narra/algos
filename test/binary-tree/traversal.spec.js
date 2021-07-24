@@ -24,14 +24,14 @@ describe('binary tree traversal', () => {
     })
   })
 
-  context('post order', () => {
+  context.only('post order', () => {
     it('should do post order traversal', () => {
       let resp = traversal.postOrder(node);
       resp.should.eql([2,6,5,12,20,15,10])
     })
   })
 
-  context('level order', () => {
+  context.only('level order', () => {
     it('should do level order traversal', () => {
       let resp = traversal.levelOrder(node);
       resp.should.eql([10,5,15,2,6,12,20])

@@ -1,6 +1,6 @@
 const bfs = require('../../src/graphs/bfs');
 
-describe('bfs', () => {
+describe.only('bfs', () => {
   it('should find the shortes path between vertices', () => {
     const resp = bfs.traverse([[1,4], [0,4,2,3], [1,3], [1,4,2], [3,0,1]], 0)
     resp.should.eql([{
