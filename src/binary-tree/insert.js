@@ -1,32 +1,43 @@
 const { Node } = require('./node');
 
-const bst = (tree, value) => {
-  let node = new Node(value)
-  let i = tree.root;
-  let p = null;
-  while(i) {
-    p = i
-    if(value <= i.data) {
-      i = i.left
-    } else {
-      i = i.right
+const bst = (node, value) => {
+  // inserting root node
+  if(node === null) {
+    return new Node(value)
+  }
+
+  // when value is less than the node value
+  // then need to insert in the left sub tree
+  if(value < node.value) {
+    // when the left subtree is empty
+    // add the node
+    if(node.left === null) {
+      node.left = new Node(value)
+      return node
     }
+
+    // when left subtree has value
+    // it should iterate over the left subtree, until a spot is found
+    bst(node.left, value)
   }
 
-  if(p == null) {
-    tree.root = node
-    return tree
+  // when the value is greater than the node value
+  // then it should be inserted in right subtree
+  if(value > node.value) {
+    // when the right subtree is empty
+    // it should insert in the right of the node
+    if(node.right === null) {
+      node.right = new Node(value)
+      return node
+    }
+
+    // if right subtree is present
+    // iterate over the right subtree
+    bst(node.right, value)
   }
 
-  if(value <= p.data) {
-    p.left = node
-    node.p = p
-  } else {
-    p.right = node
-    node.p = p
-  }
-
-  return tree;
+  // ultimately return the root node of the tree.
+  return node
 }
 
 module.exports = {

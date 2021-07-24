@@ -1,54 +1,29 @@
-let nodes;
-let time;
+const traverse = (arr, inputIndex) => {
+  // initialise visited flag per node
+  let visited = {}
 
-const traverse = (arr) => {
-  nodes = []
-  time = 0
+  // initialise stack and set input node as vistied
+  let stack = [inputIndex]
 
-  for(let i = 0; i < arr.length; i++) {
-    let node = {
-      color: 'white',
-      initial: null,
-      final: null,
-      parent: null,
-      index: i,
-      adj: arr[i]
-    }
+  let orderOfDiscovery = []
 
-    nodes.push(node)
-  }
+  // traverse all nodes until stack size is zero
+  while(stack.length > 0) {
+    const iteratingNode = stack.pop()
 
-  for(let i = 0; i < nodes.length; i++) {
-    if(nodes[i].color == 'white') {
-      traverseNode(i)
-    }    
-  }
+    // when the node is not yet visited
+    if(visited[iteratingNode] !== true) {
+      orderOfDiscovery.push(iteratingNode)
 
-  return nodes.map((node) => {
-    delete node.color
-    delete node.adj
-
-    return node
-  });
-}
-
-const traverseNode = (index) => {
-  time += 1
-  nodes[index].initial = time
-  nodes[index].color = 'grey'
-  const adj = nodes[index].adj
-
-  for(let i=0; i < adj.length; i++) {
-    if(nodes[adj[i]].color == 'white') {
-      nodes[adj[i]].parent = index
-      traverseNode(adj[i])
+      // update it as visited
+      visited[iteratingNode] = true
+      for(ele of arr[iteratingNode]) {
+        stack.push(ele)
+      }
     }
   }
 
-  time += 1
-  nodes[index].final = time
-  nodes[index].color = 'black'
-  return
+  return orderOfDiscovery
 }
 
 module.exports = {

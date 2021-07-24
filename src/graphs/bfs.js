@@ -1,46 +1,52 @@
 const traverse = (arr, index) => {
-  let nodes = []
-  for(let i = 0; i < arr.length; i++) {
-    let node = {
-      color: 'white',
-      distance: 0,
-      index: i
-    }
+  // to keep track of which vertieces are visited
+  let visited = {}
 
-    nodes.push(node)
-  }
+  // response object with the adjacent node and distance from index
+  let distanceObject = []
 
-  nodes[index].color = 'grey'
-  let queue = []
+  // initialise the queue and mark input index as visited
+  let queue = [index]
+  visited[index] = true
+  let distance = 0
+  distanceObject.push({
+    distance: 0,
+    index: index
+  })
 
-  queue.push(index)
+  while(queue.length > 0) {
+    //dequeue
+    const vertex = queue.shift()
 
-  while(queue.length != 0) {
-    parentIndex = queue.shift()
+    // increase distance by one
+    distance += 1
+    // for all the ajacent vertices
+    // mark distance and parent
+    for(adjacentVertex of arr[vertex]) {
 
-    for(let i=0; i < arr[parentIndex].length; i ++ ) {
-      let adjIndex = arr[parentIndex][i]
+      // if not yet visited
+      if(visited[adjacentVertex] !== true) {
+        // mark as visited
+        visited[adjacentVertex] = true
 
-      if(nodes[adjIndex].color === 'white') {
-        nodes[adjIndex].color = 'grey'
-        nodes[adjIndex].parent = parentIndex
-        nodes[adjIndex].distance = nodes[parentIndex].distance + 1
+        // add the parent and distance from input index
+        distanceObject.push({
+          distance: distance,
+          index: adjacentVertex,
+          parent: vertex
+        })
 
-        queue.push(adjIndex)
+        // enqueue into the queue for getting its adj vertices
+        queue.push(adjacentVertex)
       }
     }
-
-    nodes[parentIndex].color = 'black';
   }
 
-  return nodes.map((node) => {
-    delete node.color
-    return node
-  });
+  return distanceObject.sort((a, b) => {
+    return a.index - b.index
+  })
 }
 
 module.exports = {
   traverse
 }
-
-// TODO BFS without using nodes array.

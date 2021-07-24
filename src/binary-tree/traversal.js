@@ -1,56 +1,102 @@
+// print in the order of left current right
 const inOrder = (node, arr = []) => {
-  if(node == null) {
+  // when tree is empty return empty array
+  if(node === null) {
     return arr
   }
 
-  arr = inOrder(node.left, arr)
-  arr.push(node.data)
-  arr = inOrder(node.right, arr)
+  // go to the left most node
+  if(node.left !== null) {
+    arr = inOrder(node.left, arr)
+  }
+
+  // print the current node value
+  // start from left, then the currentm then right
+  arr.push(node.value)
+
+  // go to the right node
+  if(node.right !== null) {
+    arr = inOrder(node.right, arr)
+  }
+
   return arr
 }
 
+// mid left right
 const preOrder = (node, arr = []) => {
-  if(node == null) {
+  // for empty tree
+  // terminate here
+  if(node === null) {
     return arr
   }
 
-  arr.push(node.data)
-  arr = preOrder(node.left, arr)
-  arr = preOrder(node.right, arr)
+  // print the node first
+  arr.push(node.value)
+
+  // go to the left node next
+  if(node.left !== null) {
+    arr = preOrder(node.left, arr)
+  }
+
+  // finally the right node
+  if(node.right !== null) {
+    arr = preOrder(node.right, arr)
+  }
+
   return arr
 }
 
+// left right mid
 const postOrder = (node, arr = []) => {
-  if(node == null) {
+  // terminate when current node is null
+  if(node === null) {
     return arr
   }
-  arr = postOrder(node.left, arr)
-  arr = postOrder(node.right, arr)
-  arr.push(node.data)
+
+  if(node.left !== null) {
+    arr = postOrder(node.left, arr)
+  }
+
+  if(node.right !== null) {
+    arr = postOrder(node.right, arr)
+  }
+
+  arr.push(node.value)
+
   return arr
 }
 
 const levelOrder = (node) => {
-  if(node == null) {
+  // terminate if the tree is empty
+  if(node === null) {
     return []
   }
 
+  // initialise a queue with given root node
   let queue = []
   queue.push(node)
 
-  let resp = [];
+  // initialise a result array
+  let result = []
+
   while(queue.length > 0) {
-    let i = queue.shift()
-    if(i.left != null) {
-      queue.push(i.left)
+    // dequeue
+    const iteratingNode = queue.shift()
+
+    // push the dequeued node into result array
+    result.push(iteratingNode.value)
+
+    // enqueue nodes children in order into the queue
+    if(iteratingNode.left !== null) {
+      queue.push(iteratingNode.left)
     }
-    if(i.right != null) {
-      queue.push(i.right)
+
+    if(iteratingNode.left !== null) {
+      queue.push(iteratingNode.right)
     }
-    resp.push(i.data)
   }
 
-  return resp
+  return result
 }
 
 module.exports = {

@@ -5,12 +5,12 @@ describe('search', () => {
   context('bst', () => {
     it('should search if the value is present in the tree', () => {
       let arr = [10,15,5,6,12,20,15]
-      let tree = {}
-      for(let i = 0; i < arr.length; i++) {
-        tree = insert.bst(tree, arr[i])
+      let rootNode = null;
+      for(ele of arr) {
+        rootNode = insert.bst(rootNode, ele)
       }
-      should.exist(search.bst(tree,12))
-      should.not.exist(search.bst(tree,14))
+      should.exist(search.bst(rootNode,12))
+      should.not.exist(search.bst(rootNode,14))
     })
   })
 })
