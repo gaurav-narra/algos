@@ -1,6 +1,6 @@
 const binarySearch = require('../../src/arrays/binary-search');
 
-describe('binary search', () => {
+describe.only('binary search', () => {
   it('should search for element', () => {
     let resp = binarySearch.search([1,2,3,4,5,6], 3)
     resp.should.eql(true)

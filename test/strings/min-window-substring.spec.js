@@ -1,6 +1,6 @@
 const minWindowSubstring = require('../../src/strings/min-window-substring');
 
-describe('min window substring', () => {
+describe.only('min window substring', () => {
   it('should get sub string', () => {
     let resp
     resp = minWindowSubstring.minWindow('ADOBECODEBANC', 'ABC')
